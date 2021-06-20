@@ -21,7 +21,7 @@
             {% for item in recent_three %}
                 <p> {{ item.book.title }} </p>
                 <p> {{ item.book_reviews.rating }}</p>
-                    {% if item.book_reviews.rating == "5" %}
+                    {% if item.rating == "5" %}
                         Rating:<img src="{% static 'five-stars.jpg' %}" alt="5-star" class="image">
                     {% elif item.rating == "4" %}
                         Rating:<img src="{% static 'four-stars.jpg' %}" alt="4-star" class="image">
