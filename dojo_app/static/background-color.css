@@ -1,3 +1,55 @@
 body{
     background-color: lavender;
 }
+
+#all-books-container{
+    display: flex;
+}
+
+#current-book{
+    flex: 1;
+}
+
+#users-view{
+    flex: 1;
+}
+
+#scroll-area{
+    width: 600px;
+}
+
+#text-box {
+    width: 400px;
+    margin: 0 auto;
+    overflow: auto;
+    border: 1px solid black;
+    padding: 2px;
+    text-align: justify;
+    background: transparent;
+    }
+
+#all-user-reviews-container{
+    display: flex;
+}
+
+#current-book-reviews{
+    flex: 1;
+}
+#new-review{
+    flex:1;
+}
+
+hr{
+    margin-left: 0px;
+    padding-left: 0px;
+    width: 500px;
+}
+
+.italics{
+    font-style: italic;
+}
+
+.image{
+    width: 100px;
+    height: 20px;
+}

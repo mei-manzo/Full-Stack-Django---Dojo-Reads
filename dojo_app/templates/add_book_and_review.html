@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'background-color.css' %}">   
+    <title>Add a New Book</title>
+</head>
+<body>
+<header id="add-header">
+    <h1 id="welcome-add">Welcome, {{ current_user.first_name }}</h1>
+    <a id = "" href="/books">Home</a> | <a id = "logout-add" href="/logout">Logout</a> 
+</header>
+<h1>Add a New Book Title and Review</h1>
+{% if messages %}
+<ul class="messages">    
+    {% for message in messages %}    
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+    {% endfor %}
+</ul>
+{% endif %}
+    <div id="add-book-container">
+        <form action="/check_book_and_review" method='POST' id="add-form">
+            {% csrf_token %}
+            <label for="title">Book Title:</label>
+            <input class="title" type="text" name = "title">
+            <br><br>
+            <p>Book Author:</p>
+            <select name= "author">
+                <option value=""> </option>
+                {% for book in all_books %}
+                    <option value="{{ book.author }}">{{ book.author }} </option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <label for="author2">Or add a new author:</label>
+            <input class="author" type="text" name = "author2">
+            <br><br>
+            <p id = "review">Review:</p>
+            <textarea name="review"></textarea>
+            <br><br> 
+            <select name= "rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <br><br>
+            <input type="submit" value="Add book and review" id = "button">
+        </form>
+    </div>
+</body>
+</html> 

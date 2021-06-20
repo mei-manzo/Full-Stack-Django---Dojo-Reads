@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'background-color.css' %}">   
+    <title>Books</title>
+</head>
+<body>
+    {% load staticfiles %}
+    <header id="add-header">
+        <h1 id="welcome-add">Welcome, {{ current_user.first_name }}</h1>
+        <a id = "" href="/books">Home</a> | <a id = "logout-add" href="/logout">Logout</a>
+    </header>
+    <div id="all-user-reviews-container">
+        <div id="current-book-reviews">
+            <h1>{{ clicked_book.title }}</h1>
+            <p>Author: {{ clicked_book.author }}</p>
+            <h1>Reviews:</h1>
+            {% for book in all_books %}
+                {% if book.title == clicked_book.title %}
+                    {% for review in book.book_reviews.all %}
+                            {% if review.rating == "5" %}
+                                Rating:<img src="{% static 'five-stars.jpg' %}" alt="5-star" class="image">
+                            {% elif review.rating == "4" %}
+                                Rating:<img src="{% static 'four-stars.jpg' %}" alt="4-star" class="image">
+                            {% elif review.rating == "3" %}
+                                Rating:<img src="{% static 'three-stars.jpg' %}" alt="3-star" class="image">
+                            {% elif review.rating == "2" %}
+                                Rating:<img src="{% static 'two-stars.jpg' %}" alt="2-star" class="image">
+                            {% elif review.rating == "1" %}
+                                Rating:<img src="{% static 'one-star.jpg' %}" alt="1-star" class="image">
+                            {% endif %}
+                        <p><a href = "/users/{{ review.user.id }}">{{ review.user.first_name }}</a> says: </p>
+                        <p class="italics">{{  review.review }} </p>
+                            {% if current_user.first_name == review.user.first_name%}
+                                <p><a href="/delete/{{ review.id }}">Delete<a></p>
+                            {% endif %}
+                        <hr>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        </div> 
+        <div id="new-review">
+            <h1>Add a Review:</h1>
+            <form action="/check_new_review/{{ clicked_book.id }}" method='POST' id="add-form">
+                {% csrf_token %}
+                <p id = "review">Review:</p>
+                <textarea name="review"></textarea>
+                <br><br> 
+                <select name= "rating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <br><br>
+                <input type="submit" value="Submit Review" id = "button">
+            </form>
+        </div> 
+    </div>
+    <br><br> 
+</body>
+</html> 

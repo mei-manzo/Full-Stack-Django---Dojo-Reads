@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'background-color.css' %}">   
+    <title>Books</title>
+</head>
+<body>
+    <header id="add-header">
+        <h2>User Page</h2>
+        <a id = "logout-add" href="/logout">Logout</a> | <a id = "logout-add" href="/books/add">Add Book and Review</a> | <a id = "logout-add" href="/books">Home</a>
+    </header>
+    <div id="all-books-container">
+        <div id="current-book">
+            <h1>User Alias: {{ current_user.alias }} </h1>
+            <p>Name: {{ current_user.first_name }} {{ current_user.last_name }}</p>
+            <p>Email: {{ current_user.email }}</p>
+            <p>Total reviews: {{ total_reviews }} </p>
+            <br>
+            <h4>Posted reviews on the following books:</h4>
+            {% for review in all_their_reviews %}
+            <p><a href="/books/{{ review.book.id }}">{{ review.book.title }}</a></p>
+            {% endfor %}
+        </div> 
+    </div>
+    <br><br>
+</body>
+</html> 
